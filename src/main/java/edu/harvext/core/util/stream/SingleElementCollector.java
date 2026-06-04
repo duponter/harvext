@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public final class SingleElementCollector {
 
     private SingleElementCollector() {
+        throw new UnsupportedOperationException("This static class cannot be instantiated.");
     }
 
     public static <T> Collector<T, ?, Optional<T>> toOptional() {
@@ -35,26 +36,14 @@ public final class SingleElementCollector {
         return Collectors.collectingAndThen(toOptional(whenMore), new OrElseThrow<>(whenNone));
     }
 
-    private static class OrElseThrow<T> implements Function<Optional<T>, T> {
-        private final Supplier<? extends RuntimeException> exceptionSupplier;
-
-        private OrElseThrow(Supplier<? extends RuntimeException> exceptionSupplier) {
-            this.exceptionSupplier = exceptionSupplier;
-        }
-
+    private record OrElseThrow<T>(Supplier<? extends RuntimeException> exceptionSupplier) implements Function<Optional<T>, T> {
         @Override
         public T apply(Optional<T> optional) {
             return optional.orElseThrow(exceptionSupplier);
         }
     }
 
-    private static class OnlyOne<T> implements BinaryOperator<T> {
-        private final Supplier<? extends RuntimeException> exceptionSupplier;
-
-        private OnlyOne(Supplier<? extends RuntimeException> exceptionSupplier) {
-            this.exceptionSupplier = exceptionSupplier;
-        }
-
+    private record OnlyOne<T>(Supplier<? extends RuntimeException> exceptionSupplier) implements BinaryOperator<T> {
         @Override
         public T apply(T first, T second) {
             throw exceptionSupplier.get();
