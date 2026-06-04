@@ -1,20 +1,11 @@
-// Apply the java-library plugin to add support for Java Library
-apply plugin: 'java-library'
-
-buildscript {
-    repositories {
-        mavenCentral()
-        // The following is only necessary if you want to use SNAPSHOT releases.
-        // maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
+plugins {
+    id 'java-library'
 }
 
 repositories {
     mavenCentral()
-}
-
-test {
-    useJUnitPlatform()
+    // The following is only necessary if you want to use SNAPSHOT releases.
+    // maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
@@ -22,4 +13,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.assertj:assertj-core:3.27.7")
+}
+
+test {
+    useJUnitPlatform()
 }
