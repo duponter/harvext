@@ -5,3 +5,4 @@
 * Builder - Generic builder implementation to construct mutable objects.
 * SingleElementCollector - Collector implementation to collect the single element from a stream, albeit optional or not.
 * Indexed - Gatherer implementation to stream elements with their index.
+
