@@ -1,7 +1,7 @@
-# Introduction
+## Introduction
 ```harvext``` is a contraction of harvest and extension. This library harvests common and non-project related extensions and utils from the JDK and common libraries. 
 
-# Content
+## Content
 * Builder - Generic builder implementation to construct mutable objects.
 * SingleElementCollector - Collector implementation to collect the single element from a stream, albeit optional or not.
 * Indexed - Gatherer implementation to stream elements with their index.
